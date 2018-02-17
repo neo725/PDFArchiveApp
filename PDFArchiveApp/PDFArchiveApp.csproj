@@ -210,6 +210,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Assets\144-_Folder_Add-256.png" />
+    <Content Include="Assets\158-Save-256.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -222,6 +224,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="PDFArchiveApp_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\zh-tw\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
