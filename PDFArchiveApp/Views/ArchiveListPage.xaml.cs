@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using PDFArchiveApp.Models;
 using PDFArchiveApp.Services;
-
+using PDFArchiveApp.Standard.Model;
 using Windows.UI.Xaml.Controls;
 
 namespace PDFArchiveApp.Views
@@ -20,12 +20,19 @@ namespace PDFArchiveApp.Views
             InitializeComponent();
         }
 
-        public ObservableCollection<SampleOrder> Source
+        //public ObservableCollection<SampleOrder> Source
+        //{
+        //    get
+        //    {
+        //        // TODO WTS: Replace this with your actual data
+        //        return SampleDataService.GetGridSampleData();
+        //    }
+        //}
+        public ObservableCollection<PdfEntry> Source
         {
             get
             {
-                // TODO WTS: Replace this with your actual data
-                return SampleDataService.GetGridSampleData();
+                return DataService.GetEntrysData();
             }
         }
 
