@@ -121,6 +121,7 @@
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Models\SampleOrder.cs" />
+    <Compile Include="Models\View\PageViewModel.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\LiveTileService.cs" />
@@ -136,6 +137,8 @@
     <Compile Include="Views\ArchiveListPage.xaml.cs">
       <DependentUpon>ArchiveListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BoolToVisibilityConverter.cs" />
+    <Compile Include="Views\InverseBoolConverter.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Styles\Page.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
