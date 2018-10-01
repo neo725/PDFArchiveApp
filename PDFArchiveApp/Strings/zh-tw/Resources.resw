@@ -197,4 +197,10 @@
     <value>設定</value>
     <comment>Navigation view item name for Settings</comment>
   </data>
+  <data name="Settings_GoogleAuth.Text" xml:space="preserve">
+    <value>Google 授權</value>
+  </data>
+  <data name="Settings_GoogleAuth_Button.Content" xml:space="preserve">
+    <value>更新 Google 授權</value>
+  </data>
 </root>

@@ -150,15 +150,15 @@ namespace PDFArchiveApp.Views
             }
         }
 
-        private void ItemInvoked(object sender, HamburgetMenuItemInvokedEventArgs e)
-        {
-            if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
-            {
-                IsPaneOpen = false;
-            }
+        //private void ItemInvoked(object sender, HamburgetMenuItemInvokedEventArgs e)
+        //{
+        //    if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
+        //    {
+        //        IsPaneOpen = false;
+        //    }
 
-            Navigate(e.InvokedItem);
-        }
+        //    Navigate(e.InvokedItem);
+        //}
 
         private void OpenPane_Click(object sender, RoutedEventArgs e)
         {
@@ -201,5 +201,15 @@ namespace PDFArchiveApp.Views
         }
 
         private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void ItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
+        {
+            if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
+            {
+                IsPaneOpen = false;
+            }
+
+            Navigate(e.InvokedItem);
+        }
     }
 }
