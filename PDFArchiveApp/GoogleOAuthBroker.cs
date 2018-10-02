@@ -206,6 +206,7 @@ namespace PDFArchiveApp
             //string code_challenge = base64urlencodeNoPadding(sha256(code_verifier));
             const string code_challenge_method = "S256";
 
+            // https://developers.google.com/identity/protocols/OAuth2WebServer
 
             StringBuilder builder = new StringBuilder();
             builder.Append("https://accounts.google.com/o/oauth2/auth?");
