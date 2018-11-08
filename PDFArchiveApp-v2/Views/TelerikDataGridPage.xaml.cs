@@ -3,30 +3,31 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using PDFArchiveApp.Models;
-using PDFArchiveApp.Services;
-//using PDFArchiveApp.Standard.Model;
+using PDFArchiveApp_v2.Models;
+using PDFArchiveApp_v2.Services;
+
 using Windows.UI.Xaml.Controls;
 
-namespace PDFArchiveApp.Views
+namespace PDFArchiveApp_v2.Views
 {
-    public sealed partial class ArchiveListPage : Page, INotifyPropertyChanged
+    public sealed partial class TelerikDataGridPage : Page, INotifyPropertyChanged
     {
-        // TODO WTS: Change the grid as appropriate to your app.
+        // TODO WTS: Change the grid as appropriate to your app, adjust the column definitions on TelerikDataGridPage.xaml.
         // For help see http://docs.telerik.com/windows-universal/controls/raddatagrid/gettingstarted
         // You may also want to extend the grid to work with the RadDataForm http://docs.telerik.com/windows-universal/controls/raddataform/dataform-gettingstarted
-        public ArchiveListPage()
+        public TelerikDataGridPage()
         {
             InitializeComponent();
         }
 
-        //public ObservableCollection<PdfEntry> Source
-        //{
-        //    get
-        //    {
-        //        return DataService.GetEntrysData();
-        //    }
-        //}
+        public ObservableCollection<SampleOrder> Source
+        {
+            get
+            {
+                // TODO WTS: Replace this with your actual data
+                return SampleDataService.GetGridSampleData();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

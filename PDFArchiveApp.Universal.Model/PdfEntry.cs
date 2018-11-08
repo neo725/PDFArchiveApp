@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PDFArchiveApp.Universal.Model
+{
+    public class PdfEntry
+    {
+        public int Id { get; set; }
+
+        public Guid EntryId { get; set; }
+
+        public string SourcePath { get; set; }
+
+        public string Filename { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public List<PdfTag> Tags { get; set; }
+    }
+}

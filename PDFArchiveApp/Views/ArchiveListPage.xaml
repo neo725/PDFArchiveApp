@@ -26,8 +26,10 @@
         <Grid
             Grid.Row="1" 
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <tg:RadDataGrid ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind Source}" />
+            <tg:RadDataGrid ColumnDataOperationsMode="Flyout" x:Name="grid" />
         </Grid>
+        <!-- 放在 x:Name="grid" 後面 -->
+        <!--  ItemsSource="{x:Bind Source}" -->
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

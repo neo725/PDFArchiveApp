@@ -5,7 +5,11 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFArchiveApp", "PDFArchiveApp\PDFArchiveApp.csproj", "{B4BFA9D2-7584-473A-9C1A-862DA671D7E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFArchiveApp.Standard.Model", "PDFArchiveApp.Standard.Model\PDFArchiveApp.Standard.Model.csproj", "{21C9BF93-9D10-43C7-9CFD-2566DEFDF9DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFArchiveApp.Standard.Model", "PDFArchiveApp.Standard.Model\PDFArchiveApp.Standard.Model.csproj", "{21C9BF93-9D10-43C7-9CFD-2566DEFDF9DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFArchiveApp_v2", "PDFArchiveApp-v2\PDFArchiveApp_v2.csproj", "{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFArchiveApp.Standard.Model.v2", "PDFArchiveApp.Standard.Model.v2\PDFArchiveApp.Standard.Model.v2.csproj", "{CF708A29-727F-402A-8B8D-A886271F53CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,42 @@ Global
 		{21C9BF93-9D10-43C7-9CFD-2566DEFDF9DC}.Release|x64.Build.0 = Release|Any CPU
 		{21C9BF93-9D10-43C7-9CFD-2566DEFDF9DC}.Release|x86.ActiveCfg = Release|Any CPU
 		{21C9BF93-9D10-43C7-9CFD-2566DEFDF9DC}.Release|x86.Build.0 = Release|Any CPU
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|ARM.Build.0 = Debug|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x64.ActiveCfg = Debug|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x64.Build.0 = Debug|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x64.Deploy.0 = Debug|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x86.ActiveCfg = Debug|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x86.Build.0 = Debug|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Debug|x86.Deploy.0 = Debug|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|Any CPU.ActiveCfg = Release|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|ARM.ActiveCfg = Release|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|ARM.Build.0 = Release|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|ARM.Deploy.0 = Release|ARM
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x64.ActiveCfg = Release|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x64.Build.0 = Release|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x64.Deploy.0 = Release|x64
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x86.ActiveCfg = Release|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x86.Build.0 = Release|x86
+		{A37C8EAC-7E5B-4065-B28A-91D35358BB7E}.Release|x86.Deploy.0 = Release|x86
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|ARM.Build.0 = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|x64.Build.0 = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Debug|x86.Build.0 = Debug|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|ARM.Build.0 = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|x64.Build.0 = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF708A29-727F-402A-8B8D-A886271F53CB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
