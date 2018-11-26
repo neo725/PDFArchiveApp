@@ -37,18 +37,18 @@ namespace PDFArchiveApp.Views
     public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
-        private static string[] Scopes = { DriveService.Scope.Drive };
-        private static string ApplicationName = "Drive API .NET QuickStart";
-
-        /// <summary>
-        /// OAuth 2.0 client configuration.
-        /// </summary>
-        const string clientId = "338523250911-1ad660gvr6oqqcanpq01825vpcis0ivj.apps.googleusercontent.com";
-        const string clientSecret = "OzwvUgFDN_DXmdoEeJijhi3g";
         
-        const string authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
-        const string tokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
-        const string userInfoEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo";
+        private static string ApplicationName = Package.Current.DisplayName;
+
+        /////// <summary>
+        /////// OAuth 2.0 client configuration.
+        /////// </summary>
+        ////const string clientId = "338523250911-1ad660gvr6oqqcanpq01825vpcis0ivj.apps.googleusercontent.com";
+        ////const string clientSecret = "OzwvUgFDN_DXmdoEeJijhi3g";
+        
+        //const string authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+        //const string tokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
+        //const string userInfoEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo";
 
 
         public ElementTheme ElementTheme
@@ -141,17 +141,17 @@ namespace PDFArchiveApp.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var userId = "user";
+            //var userId = "user";
 
-            GoogleOAuthBroker.UserId = userId;
+            //GoogleOAuthBroker.UserId = userId;
 
-            GoogleOAuthBroker.clientId = clientId;
-            GoogleOAuthBroker.clientKey = clientSecret;
-            //GoogleOAuthBroker.callbackUrl = "urn:ietf:wg:oauth:2.0:oob";
+            //GoogleOAuthBroker.clientId = clientId;
+            //GoogleOAuthBroker.clientKey = clientSecret;
+            ////GoogleOAuthBroker.callbackUrl = "urn:ietf:wg:oauth:2.0:oob";
 
             var tokenResponse = GoogleOAuthBroker.SavedGoogleAccessToken;
 
-            if (tokenResponse == null)
+            if (true || tokenResponse == null)
             {
                 tokenResponse = await GoogleOAuthBroker.InvokeGoogleSignIn();
 
@@ -160,8 +160,8 @@ namespace PDFArchiveApp.Views
 
             var secrets = new ClientSecrets()
             {
-                ClientId = clientId,
-                ClientSecret = clientSecret
+                ClientId = GoogleOAuthBroker.ClientId,
+                ClientSecret = GoogleOAuthBroker.ClientKey
             };
 
 
@@ -180,7 +180,7 @@ namespace PDFArchiveApp.Views
                 {
                     ClientSecrets = secrets
                 }),
-                userId,
+                GoogleOAuthBroker.UserId,
                 token
                 );
 
@@ -193,8 +193,12 @@ namespace PDFArchiveApp.Views
 
             // Define parameters of request.
             FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.PageSize = 100;
+            listRequest.Spaces = "appDataFolder";
+            listRequest.PageSize = 1000; // range : [1 - 1000]
+            // https://developers.google.com/drive/api/v3/migration#fields
             listRequest.Fields = "nextPageToken, files(id, name)";
+            // Search for Parameters : https://developers.google.com/drive/api/v3/search-parameters
+            //listRequest.Q = "'appDataFolder' in parents";
 
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute()

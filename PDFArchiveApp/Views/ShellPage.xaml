@@ -112,7 +112,7 @@
         <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
             <Frame x:Name="shellFrame"/>
         </Grid>
-        <!--  Adaptive triggers  -->
+          <!--Adaptive triggers-->  
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates" CurrentStateChanged="WindowStates_CurrentStateChanged">
                 <VisualState x:Name="PanoramicState">

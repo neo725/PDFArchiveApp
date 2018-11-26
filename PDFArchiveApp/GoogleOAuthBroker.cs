@@ -24,14 +24,17 @@ namespace PDFArchiveApp
         private enum TokenTypes { AccessToken, RefreshToken }
         private const string GoogleTokenTime = "GoogleTokenTime";
 
-        public static string clientId = String.Empty;
-        public static string clientKey = String.Empty;
+        public const string ClientId = "338523250911-1ad660gvr6oqqcanpq01825vpcis0ivj.apps.googleusercontent.com";
+        public const string ClientKey = "OzwvUgFDN_DXmdoEeJijhi3g";
 
         //public static string callbackUrl = "pw.oauth2:/oauth2redirect";
         //public static string callbackUrl = "uwp.app:/oauth2redirect";
         //public static string callbackUrl = "urn:ietf:wg:oauth:2.0:oob";
         public static string callbackUrl = "urn:ietf:wg:oauth:2.0:oob:auto";
-        public static string scopes = "https://www.googleapis.com/auth/drive";
+
+        // scopes define : https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
+        //public static string scopes = "https://www.googleapis.com/auth/drive";
+        public static string scopes = "https://www.googleapis.com/auth/drive.appfolder";
 
         public static string TokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
 
@@ -47,7 +50,7 @@ namespace PDFArchiveApp
             set { isAuthorized = value; }
         }
 
-        public static string UserId { get; set; }
+        public const string UserId = "user";
 
 
         private static Lazy<DateTimeOffset> tokenLastAccess = new Lazy<DateTimeOffset>(() =>
@@ -107,7 +110,7 @@ namespace PDFArchiveApp
                 string code_verifier = randomDataBase64url(32);
                 string code_challenge = base64urlencodeNoPadding(sha256(code_verifier));
 
-                String GoogleURL = GetOAuthUrl(clientId, callbackUrl, state, code_verifier, code_challenge);
+                String GoogleURL = GetOAuthUrl(ClientId, callbackUrl, state, code_verifier, code_challenge);
 
                 System.Uri StartUri = new Uri(GoogleURL);
                 // When using the desktop flow, the success code is displayed in the html title of this end uri
@@ -254,7 +257,7 @@ namespace PDFArchiveApp
                 return null;
             }
 
-            StringContent content = new StringContent($"code={queryStringParams["code"]}&client_secret={clientKey}&redirect_uri={Uri.EscapeDataString(callbackUrl)}&client_id={clientId}&code_verifier={codeVerifier}&grant_type=authorization_code",
+            StringContent content = new StringContent($"code={queryStringParams["code"]}&client_secret={ClientKey}&redirect_uri={Uri.EscapeDataString(callbackUrl)}&client_id={ClientId}&code_verifier={codeVerifier}&grant_type=authorization_code",
                                                       Encoding.UTF8, "application/x-www-form-urlencoded");
 
             HttpResponseMessage response = await httpClient.PostAsync(TokenEndpoint, content);

@@ -11,10 +11,10 @@ namespace PDFArchiveApp.Standard.Model.v2
 
         public DbSet<PdfTag> Tags { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    //base.OnConfiguring(optionsBuilder);
-        //    optionsBuilder.UseSqlite("Filename=PdfArchive.db");
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlite("Filename=PdfArchive.db");
+        }
     }
 }

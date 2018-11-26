@@ -15,17 +15,29 @@ using Windows.Media.Ocr;
 using Windows.Graphics.Imaging;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Windows.UI.Popups;
+using PDFArchiveApp.Helpers;
+using PDFArchiveApp.Services;
+using Windows.ApplicationModel;
+using Windows.UI.Xaml;
 
 namespace PDFArchiveApp.Views
 {
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        private List<string> _resultList = new List<string>();
+        public List<string> TextResultList = new List<string>();
+
+        public List<Image> ImageResultList = new List<Image>();
+
+        public StorageFile SelectedFile { get; set; }
+
+        public Publisher AppPublisher { get; set; }
 
         public MainPage()
         {
             InitializeComponent();
             InitialLoadingCanvas();
+
         }
 
         private void InitialLoadingCanvas()
@@ -86,6 +98,8 @@ namespace PDFArchiveApp.Views
             var pdfFile = await picker.PickSingleFileAsync();
             if (pdfFile != null)
             {
+                this.SelectedFile = pdfFile;
+
                 this.tbxPath.Text = pdfFile.Path;
                 
                 try
@@ -102,7 +116,8 @@ namespace PDFArchiveApp.Views
                     fvPDF.Items.Clear();
 
                     // Clear resultList
-                    _resultList.Clear();
+                    this.TextResultList.Clear();
+                    this.ImageResultList.Clear();
 
                     for (uint i = 0; i < pageCount; i++)
                     {
@@ -121,8 +136,10 @@ namespace PDFArchiveApp.Views
                             // Create image as FlipView item's source
                             Image img = new Image();
                             img.Source = bitmap;
+
                             //Add image item to flipview.
                             fvPDF.Items.Add(img);
+                            this.ImageResultList.Add(img);
                             
                             // New OcrEngine with default language
                             var ocrEngine = OcrEngine.TryCreateFromUserProfileLanguages();
@@ -133,8 +150,9 @@ namespace PDFArchiveApp.Views
                             var result = await ocrEngine.RecognizeAsync(softwareBitmap);
                             var text = result.Text;
                             text = Regex.Replace(text, @"\s+", String.Empty);
+
                             // Add to result list
-                            _resultList.Add(text);
+                            this.TextResultList.Add(text);
 
                             stream.Dispose();
                             softwareBitmap.Dispose();
@@ -165,9 +183,80 @@ namespace PDFArchiveApp.Views
         private void fvPDF_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = fvPDF.SelectedIndex;
-            if (_resultList.Count > 0 && _resultList.Count > index)
+            if (this.TextResultList.Count > 0 && this.TextResultList.Count > index)
             {
-                this.tbText.Text = _resultList[index];
+                this.tbText.Text = this.TextResultList[index];
+            }
+        }
+
+        private async void btnSave_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (this.SelectedFile == null)
+            {
+                var dialogNotReady = new MessageDialog("尚未選擇 PDF 檔案");
+
+                dialogNotReady.Commands.Add(new UICommand { Label = "好", Id = 0 });
+                dialogNotReady.DefaultCommandIndex = 0;
+
+                await dialogNotReady.ShowAsync();
+                return;
+            }
+
+            var tokenResponse = GoogleOAuthBroker.SavedGoogleAccessToken;
+            if (true || tokenResponse == null)
+            {
+                var dialogGoogleDrive = new MessageDialog("尚未設定 Google 雲端硬碟的使用授權，是否要現在設定 ?");
+                dialogGoogleDrive.Title = Package.Current.DisplayName;
+                dialogGoogleDrive.Commands.Add(new UICommand { Label = "好，現在設定", Id = 0 });
+                dialogGoogleDrive.Commands.Add(new UICommand { Label = "否，取消儲存", Id = 1 });
+                dialogGoogleDrive.CancelCommandIndex = 1;
+                dialogGoogleDrive.DefaultCommandIndex = 0;
+
+                var resultGoogleDrive = await dialogGoogleDrive.ShowAsync();
+
+                if (Convert.ToInt32(resultGoogleDrive.Id) == 0)
+                {
+                    //this.AppPublisher?.TriggerItemInvoke(Symbol.Setting);
+                    PublisherService.Current.TriggerItemInvoke(Symbol.Setting);
+                }
+            }
+
+            // data struct
+            // pdf
+            // thumbnail
+            // text
+            // all combine into zip
+
+                var pdfFile = this.SelectedFile;
+
+            // Load PDF from file.
+            var pdfDoc = await PdfDocument.LoadFromFileAsync(pdfFile);
+
+            var pageCount = pdfDoc.PageCount;
+
+
+            var dialog = new MessageDialog("確定要儲存 ?");
+
+            dialog.Commands.Add(new UICommand { Label = "好", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "取消", Id = 1 });
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+
+            var result = await dialog.ShowAsync();
+            if (Convert.ToInt32(result.Id) == 1) return;
+
+
+        }
+
+        // 修改 OCR 的文字，即時做儲存
+        private void TbText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int index = fvPDF.SelectedIndex;
+            if (this.TextResultList.Count > 0 && this.TextResultList.Count > index)
+            {
+                this.TextResultList[index] = this.tbText.Text.Trim();
+
+                //Singleton<ToastNotificationsService>.Instance.ShowToastNotificationSample();
             }
         }
     }

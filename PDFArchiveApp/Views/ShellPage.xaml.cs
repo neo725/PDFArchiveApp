@@ -15,7 +15,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace PDFArchiveApp.Views
 {
-    public sealed partial class ShellPage : Page, INotifyPropertyChanged
+    //public sealed partial class ShellPage : Page, INotifyPropertyChanged
+    public partial class ShellPage : Page, INotifyPropertyChanged
     {
         private const string PanoramicStateName = "PanoramicState";
         private const string WideStateName = "WideState";
@@ -24,6 +25,8 @@ namespace PDFArchiveApp.Views
         private const double PanoramicStateMinWindowWidth = 1024;
 
         private bool _isPaneOpen;
+
+        
 
         public bool IsPaneOpen
         {
@@ -70,6 +73,25 @@ namespace PDFArchiveApp.Views
             InitializeComponent();
             DataContext = this;
             Initialize();
+
+            //publisher.InvokeItemEvent += Publisher_InvokeItemEvent;
+            PublisherService.Current.InvokeItemEvent += Publisher_InvokeItemEvent;
+        }
+
+        private void Publisher_InvokeItemEvent(object sender, Symbol itemName)
+        {
+            var navigationItem = PrimaryItems?.FirstOrDefault(i => i.Symbol == itemName);
+            if (navigationItem == null)
+            {
+                navigationItem = SecondaryItems?.FirstOrDefault(i => i.Symbol == itemName);
+            }
+
+            if (navigationItem != null)
+            {
+                //ChangeSelected(_lastSelectedItem, navigationItem);
+                //_lastSelectedItem = navigationItem;
+                this.Navigate(navigationItem);
+            }
         }
 
         private void Initialize()
@@ -96,6 +118,8 @@ namespace PDFArchiveApp.Views
                 GoToState(PanoramicStateName);
             }
         }
+
+        
 
         private void PopulateNavItems()
         {
@@ -150,15 +174,15 @@ namespace PDFArchiveApp.Views
             }
         }
 
-        //private void ItemInvoked(object sender, HamburgetMenuItemInvokedEventArgs e)
-        //{
-        //    if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
-        //    {
-        //        IsPaneOpen = false;
-        //    }
+        private void ItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
+        {
+            if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
+            {
+                IsPaneOpen = false;
+            }
 
-        //    Navigate(e.InvokedItem);
-        //}
+            Navigate(e.InvokedItem);
+        }
 
         private void OpenPane_Click(object sender, RoutedEventArgs e)
         {
